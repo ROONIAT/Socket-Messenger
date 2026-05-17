@@ -1,4 +1,4 @@
-# Web-Socket Chat Messenger
+# Web-Socket Messenger
 
 This project is a real-time chat application built with Python. It uses WebSockets to allow multiple users to communicate instantly. The application includes a command-line client and a web interface built with Flask, enabling users to join the chat and exchange messages in real time.
 
