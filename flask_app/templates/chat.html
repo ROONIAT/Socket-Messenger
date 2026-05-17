@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="welcome-text">
+            Welcome, {{ username }}
+        </div>
+        <div class="right-section">
+            <div class="status">Connected</div>
+            <a href="/logout">
+                <button class="logout-btn">Logout</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="app-layout">
+        <div class="sidebar" id="sidebar">
+            <div class="chat-item active" id="group-chat">Group Chat</div>
+        </div>
+
+        <div class="chat-section">
+            <div class="chat-container" id="chat-container">
+            </div>
+
+            <div class="message-bar">
+                <input type="text" id="message-input" placeholder="Type message ...">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const USERNAME = "{{ username }}";
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
+

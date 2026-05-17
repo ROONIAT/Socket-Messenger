@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Welcome To Chat</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p style="color: #e74c3c; font-size: 13px; margin-bottom: 10px;">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/login">
+        <input type="text" name="username" placeholder="Enter username" required>
+        <button type="submit">Enter Chat</button>
+    </form>
+</div>
+
+
+</body>
+</html>
