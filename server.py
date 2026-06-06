@@ -132,6 +132,10 @@ async def handler(websocket):
                     })
                 )
 
+                print(
+                    f"[public] {username} : {message}"
+                )
+
     except websockets.ConnectionClosed:
         pass
 
@@ -194,7 +198,7 @@ async def main():
     async with websockets.serve(handler, HOST, PORT, ping_interval=20, ping_timeout=20):
         await asyncio.Future()
 
-if name == "__main__":
+if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
