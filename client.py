@@ -50,7 +50,7 @@ async def receive_messages(websocket):
             print("> ", end="", flush=True) 
     except websockets.ConnectionClosed:
         print("\n[!] Error: Server disconnected!")
-        return # پایان این تسک
+        return 
 
 async def send_messages(websocket):
     loop = asyncio.get_event_loop()
