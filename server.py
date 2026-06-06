@@ -169,33 +169,36 @@ if __name__ == "__main__":
 
 
 
-#Implementation of Phase 1
+#Implementation of Phase 1&2
 
 """
 async def handler(websocket):
-    print("Client connected.")
-    first_message_received = False
+    client_ip, client_port, *unused = websocket.remote_address
+    client_id = f"{client_ip}:{client_port}" 
+
+    print(f"[+] New connection: {client_id}")
 
     try:
         async for message in websocket:
-            print("Client says:", message)
+            print(f"[{client_id}] says: {message}")
 
-            if not first_message_received:
-                await websocket.send("Hello Client!")
-                first_message_received = True
+            await websocket.send(f"Server received your message: {message}")
 
     except websockets.ConnectionClosed:
         pass
     finally:
-        print("Client disconnected.")
+        print(f"[-] Connection closed: {client_id}")
 
 async def main():
-    print(f"Server running on ws://{HOST}:{PORT}")
-    async with websockets.serve(handler, HOST, PORT):
+    print(f"--- Server running on ws://{HOST}:{PORT} ---")
+    async with websockets.serve(handler, HOST, PORT, ping_interval=20, ping_timeout=20):
         await asyncio.Future()
 
-if __name__ == "__main__":
-    asyncio.run(main())
+if name == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nServer stopped.")
 
 """
 
