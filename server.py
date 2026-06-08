@@ -8,6 +8,7 @@ PORT = 8765
 # {websocket: username}
 clients = {}
 
+shutdown_event = asyncio.Event()
 
 async def broadcast(message, exclude=None):
     if clients:
@@ -156,14 +157,20 @@ async def handler(websocket):
                 })
             )
 
+            if len(clients) == 0:
+                print("No clients connected. Shutting down server...")
+                shutdown_event.set()
+
 
 async def main():
 
     print(f"Server running on ws://{HOST}:{PORT}")
 
-    async with websockets.serve(handler, HOST, PORT):
+    async with websockets.serve(handler, HOST, PORT , ping_interval=20, ping_timeout=20):
 
-        await asyncio.Future()
+        await shutdown_event.wait()
+
+    print("Server stopped.")
 
 
 if __name__ == "__main__":
@@ -204,5 +211,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\nServer stopped.")
 
-"""
 
+
+"""
